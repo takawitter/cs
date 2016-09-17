@@ -1,15 +1,17 @@
 package com.dzyoba.alex;
 
-import java.util.List;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.Arrays;
-import java.util.Random;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 public class App {
     public static void main(String[] args) {
+    	go(new String[]{"1000000", "10000", "3"});
+    }
+    public static void go(String[] args) {
         if (args.length != 3) {
             System.out.println("Usage: App <list size> <random ops> <test runs>");
             System.exit(1);
@@ -43,6 +45,8 @@ public class App {
         measureMap.put(new TestInsertTail(list, randomOps), new long[testRuns]);
         measureMap.put(new TestSearch(list, randomOps), new long[testRuns]);
         measureMap.put(new TestDelete(list), new long[testRuns]);
+        measureMap.put(new TestAlloc(list, listSize), new long[testRuns]);
+        measureMap.put(new TestRemove(list, randomOps), new long[testRuns]);
 
         Measurer.measureTestMap(measureMap, testRuns);
 
